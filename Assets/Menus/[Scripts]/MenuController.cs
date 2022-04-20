@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.InputSystem;
 public enum Action
 {
     Start        = 0,
@@ -50,9 +50,11 @@ public class MenuController : MonoBehaviour
     {
         Time.timeScale = 0f;
     }
-    void Update()
+
+    // New input system
+    public void OnPauseGame(InputAction.CallbackContext context)
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (context.performed)
         {
             isPaused = !isPaused;
 
@@ -62,6 +64,7 @@ public class MenuController : MonoBehaviour
                 OnAction((int)Action.Resume);
         }
     }
+
     public void OnAction(Action action)
     {
         OnAction((int)action);
