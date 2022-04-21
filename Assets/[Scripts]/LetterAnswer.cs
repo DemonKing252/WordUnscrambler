@@ -19,34 +19,34 @@ public class LetterAnswer : MonoBehaviour
 
     public bool Overlapped = false;
 
-    void OnTriggerEnter(Collider other)
+    public void _OnTriggerEnter(LetterBoxController letterBox)
     {
-        letterBox = other.GetComponent<LetterBoxController>();
-        if (other.CompareTag("LetterBox"))
-        {
+        //letterBox = other.GetComponent<LetterBoxController>();
+        //if (other.CompareTag("LetterBox"))
+        //{
             Debug.Log("Letter enter");
-            letterBox.colliderNames.Add(other.name);
+            //letterBox.colliderNames.Add(other.name);
             if (Index == letterBox.Index)
             {
                 Overlapped = true;
                 letterBox.IsOnLetterAnswer = true;
                 letterBox.letterAnswer = this;
             }
-        }
+        //}
     }
-    private void OnTriggerExit(Collider other)
+    public void _OnTriggerExit(LetterBoxController letterBox)
     {
-        if (other.CompareTag("LetterBox"))
-        {
-            letterBox.colliderNames.Remove(other.name);
-            if (letterBox.colliderNames.Count == 0)
-            {
+        //if (other.CompareTag("LetterBox"))
+        //{
+            //letterBox.colliderNames.Remove(other.name);
+            //if (letterBox.colliderNames.Count == 0)
+            //{
                 Overlapped = false;
-                Debug.Log("Letter exit");
+                //Debug.Log("Letter exit");
                 letterBox.IsOnLetterAnswer = false;
                 letterBox.letterAnswer = null;
                 letterBox = null;
-            }
-        }
+           // }
+        //}
     }
 }

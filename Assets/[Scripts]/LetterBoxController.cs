@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class LetterBoxController : MonoBehaviour
 {
+    [SerializeField] private LayerMask mask;
     private Vector3 offsetFromWall;
     private float zOffset;
     private Vector3 originalPosition;
@@ -21,6 +22,7 @@ public class LetterBoxController : MonoBehaviour
     [SerializeField]
     private MeshRenderer mesh = null;
     private bool heldDown = false;
+    private BoxCollider collider;
 
     public string Character { get { return character; } set { character = value; text.text = value; } }
 
@@ -70,14 +72,26 @@ public class LetterBoxController : MonoBehaviour
     }
     private void Awake()
     {
-
+        collider = GetComponent<BoxCollider>();
         originalPosition = transform.position;
     }
 
     
     private void Update()
     {
-        
+        if (IsHeldByMouse)
+        {
+            RaycastHit[] hits = Physics.BoxCastAll(transform.position, collider.bounds.size * 0.25f, Vector3.forward, transform.rotation, 10f, mask);
+
+            foreach (LetterAnswer box in BoardManager.Instance.letterAnswers)
+            {
+                box._OnTriggerExit(this);
+            }
+            foreach(RaycastHit hit in hits)
+            {
+                hit.transform.GetComponent<LetterAnswer>()._OnTriggerEnter(this);
+            }
+        }
     }
     public void ResetLetterBox()
     {
@@ -96,5 +110,5 @@ public class LetterBoxController : MonoBehaviour
     {
         transform.position = GetMouseAsWorldPoint() + offsetFromWall;
     }
-
+    
 }

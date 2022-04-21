@@ -81,7 +81,7 @@ public class BoardManager : MonoBehaviour
             {
                 LetterBoxController letter = hit.transform.GetComponent<LetterBoxController>();
 
-                Debug.Log("Hit on: " + hit.transform.name);
+                //Debug.Log("Hit on: " + hit.transform.name);
                 if (Mouse.current.leftButton.wasPressedThisFrame)
                 {
                     letter.IsHeldByMouse = true;
