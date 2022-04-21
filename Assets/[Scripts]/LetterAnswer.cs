@@ -17,6 +17,8 @@ public class LetterAnswer : MonoBehaviour
     [System.NonSerialized]
     public bool Occupied = false;
 
+    public bool Overlapped = false;
+
     void OnTriggerEnter(Collider other)
     {
         letterBox = other.GetComponent<LetterBoxController>();
@@ -26,6 +28,7 @@ public class LetterAnswer : MonoBehaviour
             letterBox.colliderNames.Add(other.name);
             if (Index == letterBox.Index)
             {
+                Overlapped = true;
                 letterBox.IsOnLetterAnswer = true;
                 letterBox.letterAnswer = this;
             }
@@ -38,6 +41,7 @@ public class LetterAnswer : MonoBehaviour
             letterBox.colliderNames.Remove(other.name);
             if (letterBox.colliderNames.Count == 0)
             {
+                Overlapped = false;
                 Debug.Log("Letter exit");
                 letterBox.IsOnLetterAnswer = false;
                 letterBox.letterAnswer = null;
