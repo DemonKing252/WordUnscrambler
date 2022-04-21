@@ -85,11 +85,11 @@ public class LetterBoxController : MonoBehaviour
 
             foreach (LetterAnswer box in BoardManager.Instance.letterAnswers)
             {
-                box._OnTriggerExit(this);
+                box.OnHitExit(this);
             }
             foreach(RaycastHit hit in hits)
             {
-                hit.transform.GetComponent<LetterAnswer>()._OnTriggerEnter(this);
+                hit.transform.GetComponent<LetterAnswer>().OnHitEnter(this);
             }
         }
     }

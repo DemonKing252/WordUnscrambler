@@ -19,34 +19,24 @@ public class LetterAnswer : MonoBehaviour
 
     public bool Overlapped = false;
 
-    public void _OnTriggerEnter(LetterBoxController letterBox)
+    // Collision enter and exit has some issues. So im using a box cast instead.
+    // The main issue is that if i collide with 2 objects, and exit one of them, collision exit gets called,
+    // which causes a problem where the game thinks im placing a letter in an invalid spot when its
+    // actually in a valid spot.
+    public void OnHitEnter(LetterBoxController letterBox)
     {
-        //letterBox = other.GetComponent<LetterBoxController>();
-        //if (other.CompareTag("LetterBox"))
-        //{
-            Debug.Log("Letter enter");
-            //letterBox.colliderNames.Add(other.name);
-            if (Index == letterBox.Index)
-            {
-                Overlapped = true;
-                letterBox.IsOnLetterAnswer = true;
-                letterBox.letterAnswer = this;
-            }
-        //}
+        if (Index == letterBox.Index)
+        {
+            Overlapped = true;
+            letterBox.IsOnLetterAnswer = true;
+            letterBox.letterAnswer = this;
+        }
     }
-    public void _OnTriggerExit(LetterBoxController letterBox)
+    public void OnHitExit(LetterBoxController letterBox)
     {
-        //if (other.CompareTag("LetterBox"))
-        //{
-            //letterBox.colliderNames.Remove(other.name);
-            //if (letterBox.colliderNames.Count == 0)
-            //{
-                Overlapped = false;
-                //Debug.Log("Letter exit");
-                letterBox.IsOnLetterAnswer = false;
-                letterBox.letterAnswer = null;
-                letterBox = null;
-           // }
-        //}
+        Overlapped = false;
+        letterBox.IsOnLetterAnswer = false;
+        letterBox.letterAnswer = null;
+        letterBox = null;
     }
 }

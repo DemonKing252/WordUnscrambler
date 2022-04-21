@@ -16,19 +16,9 @@ public enum Action
     Pause        = 7,
     Resume       = 8,
     Credit       = 9
-    //SaveGame     = 9,
-    //LoadGame     = 10
 }
 public class MenuController : MonoBehaviour
 {
-    //public delegate void SaveGameEvent();
-    //public delegate void LoadGameEvent();
-    //public event SaveGameEvent onSaveGame;
-    //public event LoadGameEvent onLoadGame;
-
-
-    //[SerializeField] private TMP_Text playerSkillText;
-
     [SerializeField] Canvas gameCanvas;
     [SerializeField] Canvas menuCanvas;
     [SerializeField] Canvas loseCanvas;
@@ -72,7 +62,6 @@ public class MenuController : MonoBehaviour
 
     public void OnAction(int action)
     {
-        //AudioManager.Instance.PlaySound(Sfx.BtnClick);
 
         switch ((Action)action)
         {
@@ -110,7 +99,6 @@ public class MenuController : MonoBehaviour
             case Action.Resume:
             
                 Time.timeScale = 1f;
-                //Cursor.lockState = CursorLockMode.Locked;
                 gameCanvas.gameObject.SetActive(false);
                 menuCanvas.gameObject.SetActive(false);
                 loseCanvas.gameObject.SetActive(false);
@@ -120,7 +108,6 @@ public class MenuController : MonoBehaviour
                 creditCanvas.gameObject.SetActive(false);
                 break;
             case Action.Start:
-                //Cursor.lockState = CursorLockMode.Locked;
                 gameCanvas.gameObject.SetActive(true);
                 menuCanvas.gameObject.SetActive(false);
                 loseCanvas.gameObject.SetActive(false);
@@ -130,32 +117,8 @@ public class MenuController : MonoBehaviour
                 creditCanvas.gameObject.SetActive(false);
                 Time.timeScale = 1f;
                 BoardManager.Instance.Setup();
-                //GameDataManager.Instance.Reset();
 
                 break;
-            //case Action.LoadGame:
-            //    Cursor.lockState = CursorLockMode.Locked;
-            //    gameCanvas.gameObject.SetActive(true);
-            //    menuCanvas.gameObject.SetActive(false);
-            //    loseCanvas.gameObject.SetActive(false);
-            //    winCanvas.gameObject.SetActive(false);
-            //    instructionsCanvas.gameObject.SetActive(false);
-            //    pauseCanvas.gameObject.SetActive(false);
-            //    Time.timeScale = 1f;
-            //    LoadGame();
-            //    break;
-            //case Action.SaveGame:
-            //    Cursor.lockState = CursorLockMode.None;
-            //    gameCanvas.gameObject.SetActive(false);
-            //    menuCanvas.gameObject.SetActive(true);
-            //    loseCanvas.gameObject.SetActive(false);
-            //    winCanvas.gameObject.SetActive(false);
-            //    instructionsCanvas.gameObject.SetActive(false);
-            //    pauseCanvas.gameObject.SetActive(false);
-            //    Time.timeScale = 0f;
-            //    SaveAndQuit();
-            //    SceneManager.LoadScene("Main");
-            //    break;
             case Action.Instructions:
 
                 Cursor.lockState = CursorLockMode.None;
@@ -169,7 +132,6 @@ public class MenuController : MonoBehaviour
                 break;
 
             case Action.Victory:
-                //Cursor.lockState = CursorLockMode.None;
                 gameCanvas.gameObject.SetActive(false);
                 menuCanvas.gameObject.SetActive(false);
                 loseCanvas.gameObject.SetActive(false);
@@ -180,7 +142,6 @@ public class MenuController : MonoBehaviour
                 Time.timeScale = 0f;
                 break;
             case Action.Defeat:
-                //Cursor.lockState = CursorLockMode.None;
                 gameCanvas.gameObject.SetActive(false);
                 menuCanvas.gameObject.SetActive(false);
                 loseCanvas.gameObject.SetActive(true);
@@ -191,7 +152,6 @@ public class MenuController : MonoBehaviour
                 Time.timeScale = 0f;
                 break;
             case Action.PlayAgain:
-                //Cursor.lockState = CursorLockMode.None;
                 SceneManager.LoadScene("Main");
 
                 break;
@@ -208,15 +168,4 @@ public class MenuController : MonoBehaviour
                 break;
         }
     }
-    //private void LoadGame()
-    //{
-    //    onLoadGame?.Invoke();
-    //    //Debug.Log("Loading game...");
-    //}
-    //private void SaveAndQuit()
-    //{
-    //    onSaveGame?.Invoke();
-    //    //Debug.Log("Saving game...");
-    //}
-
 }

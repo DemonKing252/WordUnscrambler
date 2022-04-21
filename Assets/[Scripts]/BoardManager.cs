@@ -7,9 +7,6 @@ using UnityEngine.InputSystem;
 
 public class BoardManager : MonoBehaviour
 {
-    public delegate void OnKeyPressed(KeyCode key);
-    public event OnKeyPressed onKeyPressed;
-
     [SerializeField]
     public LetterBoxController[] letters;
     [SerializeField]
@@ -37,10 +34,6 @@ public class BoardManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-    }
-    void Start()
-    {
-
     }
     public void Setup()
     {
@@ -75,13 +68,10 @@ public class BoardManager : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 100))
         {
-
-            
             if (hit.collider.gameObject.GetComponent<LetterBoxController>() != null)
             {
                 LetterBoxController letter = hit.transform.GetComponent<LetterBoxController>();
 
-                //Debug.Log("Hit on: " + hit.transform.name);
                 if (Mouse.current.leftButton.wasPressedThisFrame)
                 {
                     letter.IsHeldByMouse = true;
@@ -89,8 +79,6 @@ public class BoardManager : MonoBehaviour
                 }
                 else if (Mouse.current.leftButton.wasReleasedThisFrame)
                 {
-                    //Debug.Log("got here: " + letter.name);
-
                     foreach (LetterBoxController box in letters)
                     {
                         if (box.IsHeldByMouse)
